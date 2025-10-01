@@ -30,6 +30,12 @@ int main() {
     cout << "\nArturo's test score is: " << myStuTestScores["Arturo"] << endl;
     cout << "Blake's test score is: " << myStuTestScores["Blake"] << endl;
     cout << "Chase's test score is: " << myStuTestScores["Chase"] << endl;
+    cout << "\n";
+
+    // Loop through the hash map with a C++ programming idiom
+    for (auto &pair : myStuTestScores) {
+        cout << pair.first << ": " << pair.second << endl;
+    }
 
 
     return 0;
