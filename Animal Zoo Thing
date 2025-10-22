@@ -1,0 +1,106 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+using namespace std;
+
+class Animal {
+private:
+    string Name;
+    int Age;
+    string Species;
+    string Color;
+    string bSeason;
+    int Weight;
+    string arrivedFrom;
+
+    public:
+    Animal(string t, int u, string v, string w, string x, int y, string z) {
+        Name = t;
+        Age = u;
+        Species = v;
+        Color = w;
+        bSeason = x;
+        Weight = y;
+        arrivedFrom = z;
+    }
+
+    void setName(string t) {
+        Name = t;
+    }
+    string getName() {
+        return Name;
+    }
+    void setAge(int u) {
+        Age = u;
+    }
+    int getAge() {
+        return Age;
+    }
+    void setSpecies(string v) {
+        Species = v;
+    }
+    string getSpecies() {
+        return Species;
+    }
+    void setColor(string w) {
+        Color = w;
+    }
+    string getColor() {
+        return Color;
+    }
+    void setBSeason(string x) {
+        bSeason = x;
+    }
+    string getBSeason() {
+        return bSeason;
+    }
+    void setWeight(int y) {
+        Weight = y;
+    }
+    int getWeight() {
+        return Weight;
+    }
+    void setarrivedFrom(string z) {
+        arrivedFrom = z;
+    }
+    string getarrivedFrom() {
+        return arrivedFrom;
+    }
+};
+
+class Hyena: public Animal {
+public:
+    Hyena(string t, int u, string v, string w, string x, int y, string z)
+        : Animal(t, u, v, w, x, y, z) {}
+};
+
+class Lion: public Animal {
+public:
+    Lion(string t, int u, string v, string w, string x, int y, string z)
+        : Animal(t, u, v, w, x, y, z) {}
+};
+
+class Tiger: public Animal {
+public:
+    Tiger(string t, int u, string v, string w, string x, int y, string z)
+        : Animal(t, u, v, w, x, y, z) {}
+};
+
+class Bear: public Animal {
+public:
+    Bear(string t, int u, string v, string w, string x, int y, string z)
+        : Animal(t, u, v, w, x, y, z) {}
+};
+
+int main() {
+vector<Animal*> animals; // holds all the animals
+    map<string, int> speciesCount; // keeps count by species
+
+    animals.push_back(new Hyena("Shenzi", 4, "Hyena", "tan", "spring", 70, "Friguia Park, Tunisia"));
+    speciesCount["Hyena"]++;
+
+
+
+    return 0;
+}
