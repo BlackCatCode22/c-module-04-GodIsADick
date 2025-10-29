@@ -7,6 +7,7 @@ using namespace std;
 class Animal {
 private:
     string Name;
+    string Sex;
     int Age;
     string Species;
     string Color;
@@ -15,8 +16,9 @@ private:
     string arrivedFrom;
 
     public:
-    Animal(string t, int u, string v, string w, string x, int y, string z) {
-        Name = t;
+    Animal(string s, string t, int u, string v, string w, string x, int y, string z) {
+        Name = s;
+	    Sex = t;
         Age = u;
         Species = v;
         Color = w;
@@ -25,11 +27,19 @@ private:
         arrivedFrom = z;
     }
 
-    void setName(string t) {
-        Name = t;
+    virtual ~Animal() {}
+
+    void setName(string s) {
+        Name = s;
     }
     string getName() {
         return Name;
+    }
+    void setSex(string t) {
+	    Sex = t;
+    }
+    string getSex() {
+	    return Sex;
     }
     void setAge(int u) {
         Age = u;
@@ -49,10 +59,10 @@ private:
     string getColor() {
         return Color;
     }
-    void setBSeason(string x) {
+    void setbSeason(string x) {
         bSeason = x;
     }
-    string getBSeason() {
+    string getbSeason() {
         return bSeason;
     }
     void setWeight(int y) {
@@ -71,36 +81,86 @@ private:
 
 class Hyena: public Animal {
 public:
-    Hyena(string t, int u, string v, string w, string x, int y, string z)
-        : Animal(t, u, v, w, x, y, z) {}
+    Hyena(string s, string t, int u, string v, string w, string x, int y, string z)
+        : Animal(s, t, u, v, w, x, y, z) {}
 };
 
 class Lion: public Animal {
 public:
-    Lion(string t, int u, string v, string w, string x, int y, string z)
-        : Animal(t, u, v, w, x, y, z) {}
+    Lion(string s, string t, int u, string v, string w, string x, int y, string z)
+        : Animal(s, t, u, v, w, x, y, z) {}
 };
 
 class Tiger: public Animal {
 public:
-    Tiger(string t, int u, string v, string w, string x, int y, string z)
-        : Animal(t, u, v, w, x, y, z) {}
+    Tiger(string s, string t, int u, string v, string w, string x, int y, string z)
+        : Animal(s, t, u, v, w, x, y, z) {}
 };
 
 class Bear: public Animal {
 public:
-    Bear(string t, int u, string v, string w, string x, int y, string z)
-        : Animal(t, u, v, w, x, y, z) {}
+    Bear(string s, string t, int u, string v, string w, string x, int y, string z)
+        : Animal(s, t, u, v, w, x, y, z) {}
 };
 
 int main() {
 vector<Animal*> animals; // holds all the animals
     map<string, int> speciesCount; // keeps count by species
 
-    animals.push_back(new Hyena("Shenzi", 4, "Hyena", "tan", "spring", 70, "Friguia Park, Tunisia"));
+    animals.push_back(new Hyena("Shenzi", "Female", 4, "Hyena", "Tan", "Spring", 70, "Friguia Park, Tunisia"));
     speciesCount["Hyena"]++;
 
+    animals.push_back(new Hyena("Banzai", "Male", 12, "Hyena", "Brown", "Fall", 150, "Friguia Park, Tunisia"));
+    speciesCount["Hyena"]++;
 
+    animals.push_back(new Hyena("Ed", "Male", 4, "Hyena", "Black", "Spring", 120, "Friguia Park, Tunisia"));
+    speciesCount["Hyena"]++;
+
+    animals.push_back(new Hyena("Zig", "Female", 8, "Hyena", "Black and Tan Stripes", "Unknown", 105, "Friguia Park, Tunisia"));
+    speciesCount["Hyena"]++;
+
+    animals.push_back(new Lion("Scar", "Female", 6, "Lion", "Tan", "Spring", 300, "Zanzibar, Tanzania"));
+    speciesCount["Lion"]++;
+
+    animals.push_back(new Lion("Mufasa", "Female", 12, "Lion", "Dark Tan", "Winter", 375, "KopeLion, Tanzania"));
+    speciesCount["Lion"]++;
+
+    animals.push_back(new Lion("Simba", "Male", 22, "Lion", "Golden", "Fall", 450, "Zanzibar, Tanzania"));
+    speciesCount["Lion"]++;
+
+    animals.push_back(new Lion("Kiara", "Female", 4, "Lion", "Tan and Brown", "Spring", 275, "KopeLion, Tanzania"));
+    speciesCount["Lion"]++;
+
+    animals.push_back(new Tiger("Tony", "Male", 2, "Tiger", "Gold and Tan Stripes", "Spring", 270, "Dhaka, Bangladesh"));
+    speciesCount["Tiger"]++;
+
+    animals.push_back(new Tiger("Tigger", "Female", 4,"Tiger", "Black Stripes", "Spring", 400, "Dhaka, Bangladesh"));
+    speciesCount["Tiger"]++;
+
+    animals.push_back(new Tiger("Amber", "Male", 18, "Tiger", "Gold and Tan", "Fall", 300, "Bardia, Nepal"));
+    speciesCount["Tiger"]++;
+
+    animals.push_back(new Tiger("Cosimia", "Female", 3, "Tiger", "Black Stripes", "Spring", 285, "Bardia, Nepal"));
+    speciesCount["Tiger"]++;
+
+    animals.push_back(new Bear("Yogi", "Male", 7, "Bear", "Brown", "Spring", 320, "Alaska Zoo, Alaska"));
+    speciesCount["Bear"]++;
+
+    animals.push_back(new Bear("Smokey", "Female", 25, "Bear", "Black", "Spring", 425, "Woodland Park Zoo, Washington"));
+    speciesCount["Bear"]++;
+
+    animals.push_back(new Bear("Paddington", "Female", 4, "Bear", "Black", "Fall", 355, "Woodland Park Zoo, Washington"));
+    speciesCount["Bear"]++;
+
+    animals.push_back(new Bear("Lippy", "Male", 4, "Bear", "Brown", "Spring", 405, "Alaska Zoo, Alaska"));
+    speciesCount["Bear"]++;
+
+    cout << "Hyenas: " << speciesCount["Hyena"] << endl;
+    cout << "Lions: " << speciesCount["Lion"] << endl;
+    cout << "Tigers: " << speciesCount["Tiger"] << endl;
+    cout << "Bears: " << speciesCount["Bear"] << endl;
+
+    for (auto a : animals) delete a;
 
     return 0;
 }
