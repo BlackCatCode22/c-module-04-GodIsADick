@@ -1,0 +1,330 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <chrono>
+#include <ctime>
+#include <iomanip>
+#include <unordered_map>
+using namespace std;
+
+class Animal {
+private:
+    static int NumofAnimals;
+    string name;
+    string id;
+    string bday;
+    string sex;
+    string species;
+    string birthseason;
+    string weight;
+    string color;
+    string location;
+    string state;
+    string arrivaldate;
+    int age;
+
+public:
+
+    //constructor
+    Animal(const string &name, const string &id, const string &bday, const string &sex,
+        const string &species, const string &birthseason,const string &weight,
+        const string &color, const string &location, const string &state,
+        const string &arrivaldate,int age) {
+        this->name = name;
+        this->id = id;
+        this->bday = bday;
+        this->sex = sex;
+        this->species = species;
+        this->birthseason = birthseason;
+        this->weight = weight;
+        this->color = color;
+        this->location = location;
+        this->state = state;
+        this->arrivaldate = arrivaldate;
+        this->age = age;
+
+        // Increment the static animal counter
+        NumofAnimals++;
+    }
+
+    //Static getter
+    static int getNumofAnimals() {return NumofAnimals;}
+
+    // Getters
+    string getName() const { return name;}
+    string getId() const { return id;}
+    string getBday() const { return bday;}
+    string getSex() const { return sex;}
+    string getSpecies() const { return species;}
+    string getBirthseason() const { return birthseason;}
+    string getWeight() const { return weight;}
+    string getColor() const { return color;}
+    string getLocation() const { return location;}
+    string getState() const { return state;}
+    string getArrivaldate() const { return arrivaldate;}
+    int getAge() const { return age;}
+
+
+    // ======= Setters =======
+    void setName(const string& name) { this->name = name; }
+    void setId(const string& id) { this->id = id; }
+    void setBday(const string& bday) { this->bday = bday; }
+    void setSex(const string& sex) { this->sex = sex; }
+    void setSpecies(const string& species) { this->species = species; }
+    void setBirthSeason(const string& birthseason) { this->birthseason = birthseason; }
+    void setWeight(const string& weight) { this->weight = weight; }
+    void setColor(const string& color) { this->color = color; }
+    void setLocation(const string& location) { this->location = location; }
+    void setState(const string& state) { this->state = state; }
+    void setArrivaldate(const string& arrivaldate) { this->arrivaldate = arrivaldate; }
+    void setAge(int age) { this->age = age; }
+
+    //toString() method
+    string toString() const {
+        ostringstream oss;
+        oss << "Animal Information:\n"
+            << "-------------------\n"
+            << "Name: " << name << "\n"
+            << "ID: " << id << "\n"
+            << "Birthday: " << bday << "\n"
+            << "Sex: " << sex << "\n"
+            << "Species: " << species << "\n"
+            << "Birth Season: " << birthseason << "\n"
+            << "Weight: " << weight << "\n"
+            << "Color: " << color << "\n"
+            << "Location: " << location << "\n"
+            << "State: " << state << "\n"
+            << "Arrival Date: " << arrivaldate << "\n"
+            << "Age: " << age << "\n"
+            << "Total Animals: " << NumofAnimals << "\n";
+        return oss.str();
+    }
+};
+
+int Animal::NumofAnimals = 0;
+
+// Todo Hyena subclass
+class Hyena : public Animal {
+private:
+static int NumofHyena;
+
+public:
+    Hyena(const string &name, const string &id, const string &bday, const string &sex,
+        const string &species, const string &birthseason,const string &weight,
+        const string &color, const string &location, const string &state,
+        const string &arrivaldate,int age)
+    : Animal(name, id, bday, sex, species, birthseason, weight, color, location, state, arrivaldate,
+        age) {
+        NumofHyena++;
+    }
+
+    static int getNumofHyena() {return NumofHyena;}
+};
+int Hyena::NumofHyena = 0;
+
+// Todo Lion subclass
+class Lion : public Animal {
+private:
+    static int NumofLion;
+
+public:
+    Lion(const string &name, const string &id, const string &bday, const string &sex,
+        const string &species, const string &birthseason,const string &weight,
+        const string &color, const string &location, const string &state,
+        const string &arrivaldate,int age)
+    : Animal(name, id, bday, sex, species, birthseason, weight, color, location, state, arrivaldate,
+        age) {
+        NumofLion++;
+    }
+
+    static int getNumofLion() {return NumofLion;}
+};
+int Lion::NumofLion = 0;
+
+// Todo Tiger subclass
+class Tiger : public Animal {
+private:
+    static int NumofTiger;
+
+public:
+    Tiger(const string &name, const string &id, const string &bday, const string &sex,
+        const string &species, const string &birthseason,const string &weight,
+        const string &color, const string &location, const string &state,
+        const string &arrivaldate,int age)
+    : Animal(name, id, bday, sex, species, birthseason, weight, color, location, state, arrivaldate,
+        age) {
+        NumofTiger++;
+    }
+
+    static int getNumofTiger() {return NumofTiger;}
+};
+int Tiger::NumofTiger = 0;
+
+// Todo Bear subclass
+class Bear : public Animal {
+private:
+    static int NumofBear;
+
+public:
+    Bear(const string &name, const string &id, const string &bday, const string &sex,
+        const string &species, const string &birthseason,const string &weight,
+        const string &color, const string &location, const string &state,
+        const string &arrivaldate,int age)
+    : Animal(name, id, bday, sex, species, birthseason, weight, color, location, state, arrivaldate,
+        age) {
+        NumofBear++;
+    }
+
+    static int getNumofBear() {return NumofBear;}
+};
+int Bear::NumofBear = 0;
+
+
+
+
+
+
+
+int main() {
+
+    //hashmap
+    unordered_map<string, Animal*> animalmap;
+
+
+    fstream file1;
+
+    file1.open("arrivingAnimals.txt", ios::in);
+
+    if (file1.is_open()) {
+        string line;
+        while (getline(file1, line)) {
+            //cout << line << endl;
+
+            string arrivaldate = "";
+            string name;
+            string bday;
+
+            //todo Parsing the file
+            size_t pos = 0;
+            string delimiter = ", ";
+
+            //split element 1
+            pos = line.find(delimiter);
+            string var1 = line.substr(0, pos);
+            line.erase(0, pos = pos + delimiter.length());
+
+            // parse string again
+            istringstream iss1(var1);
+            int age;
+            string year,old,sex,species;
+            //parse the tokens
+            iss1 >> age >> year >> old >> sex >> species;
+
+
+            //split element 2
+            pos = line.find(delimiter);
+            string var2 = line.substr(0, pos);
+            line.erase(0, pos = pos + delimiter.length());
+            //parse the second string
+            istringstream iss2(var2);
+            string Born,in,birthseason;
+            //parse the tokens
+            iss2 >> Born >> in >> birthseason;
+
+
+            //split element 3 - color
+            pos = line.find(delimiter);
+            string color = line.substr(0, pos);
+            line.erase(0, pos = pos + delimiter.length());
+            //cout << color << endl;
+
+            //split element 4 - weight
+            pos = line.find(delimiter);
+            string weight = line.substr(0, pos);
+            line.erase(0, pos = pos + delimiter.length());
+            //cout << weight << endl;
+
+            //split element 5 - location
+            pos = line.find(delimiter);
+            string location = line.substr(0, pos);
+            line.erase(0, pos = pos + delimiter.length());
+            //cout << location << endl;
+
+            //split element 6 - state
+            pos = line.find(delimiter);
+            string state = line.substr(0, pos);
+            line.erase(0, pos = pos + delimiter.length());
+            //cout << state << endl;
+
+            //todo hyena
+            if (species == "hyena") {
+            //Id maker for object
+                string hyenaid = "Hy0" + to_string(Hyena::getNumofHyena());
+
+                auto* hyena = new Hyena("",hyenaid,"",sex,species,birthseason,
+                    weight,color,location,state,arrivaldate,age);
+
+                    animalmap[hyenaid] = hyena;
+
+
+            }
+
+            //todo lion
+            if (species == "lion") {
+                //Id maker for object
+                string lionid = "Li0" + to_string(Lion::getNumofLion());
+
+                auto* lion = new Lion("",lionid,"",sex,species,birthseason,
+                    weight,color,location,state,arrivaldate,age);
+
+                animalmap[lionid] = lion;
+
+
+            }
+
+            //todo tiger
+            if (species == "tiger") {
+                //Id maker for object
+                string tigerid = "Ti0" + to_string(Tiger::getNumofTiger());
+
+                auto* tiger = new Tiger("",tigerid,"",sex,species,birthseason,
+                    weight,color,location,state,arrivaldate,age);
+
+                animalmap[tigerid] = tiger;
+
+
+            }
+
+            //todo bear
+            if (species == "bear") {
+                //Id maker for object
+                string bearid = "Be0" + to_string(Bear::getNumofBear());
+
+                auto* bear = new Bear("",bearid,"",sex,species,birthseason,
+                    weight,color,location,state,arrivaldate,age);
+
+                animalmap[bearid] = bear;
+
+
+            }
+
+
+
+
+
+        }
+
+
+        file1.close();
+    }else{cout<<"Error opening file"<<endl;}
+
+        Animal* a = animalmap["Hy01"];
+        cout << a->toString() << endl;
+
+
+
+
+
+    return 0;
+}
