@@ -1,0 +1,24 @@
+Hyena Habitat (4)
+  - Hy01; Kamari; birth date 2020-03-15; tan color; female; 70 pounds; from Friguia Park, Tunisia; arrived 2024-03-05 | Clan: Motto Clan
+  - Hy02; Zuri; birth date 2022-03-15; mottled color; male; 85 pounds; from Serengeti National Park, Tanzania; arrived 2024-04-02 | Clan: Serengeti Clan
+  - Hy03; Nia; birth date 2021-09-15; sandy color; female; 78 pounds; from Ngorongoro Conservation Area, Tanzania; arrived 2024-04-15 | Clan: Savannah Clan
+  - Hy04; Paka; birth date 2020-12-15; gray color; male; 90 pounds; from Etosha National Park, Namibia; arrived 2024-04-28 | Clan: Spotted Clan
+
+Lion Habitat (4)
+  - Li01; Simba; birth date 2017-12-15; golden color; male; 420 pounds; from Maasai Mara, Kenya; arrived 2024-03-18 | Pride: Golden Pride
+  - Li02; Nala; birth date 2019-09-15; tawny color; female; 360 pounds; from Kruger National Park, South Africa; arrived 2024-04-06 | Pride: Savanna Pride
+  - Li03; Aslan; birth date 2018-06-15; dark golden color; male; 410 pounds; from Serengeti National Park, Tanzania; arrived 2024-04-18 | Pride: Sunset Pride
+  - Li04; Sarabi; birth date 2022-03-15; light tawny color; female; 340 pounds; from Okavango Delta, Botswana; arrived 2024-05-01 | Pride: River Pride
+
+Tiger Habitat (4)
+  - Ti01; Rajah; birth date 2021-09-15; orange color; female; 310 pounds; from Sundarbans Reserve, India; arrived 2024-03-22 | Ambush: Ember Ambush
+  - Ti02; Shere Khan; birth date 2020-12-15; white color; male; 290 pounds; from Ranthambore National Park, India; arrived 2024-04-09 | Ambush: Jungle Ambush
+  - Ti03; Richard Parker; birth date 2019-03-15; striped orange color; female; 320 pounds; from Bandhavgarh National Park, India; arrived 2024-04-20 | Ambush: River Ambush
+  - Ti04; Nadia; birth date 2018-06-15; golden color; male; 330 pounds; from Chitwan National Park, Nepal; arrived 2024-05-04 | Ambush: Shadow Ambush
+
+Bear Habitat (4)
+  - Be01; Baloo; birth date 2018-06-15; brown color; male; 500 pounds; from Katmai National Park, Alaska; arrived 2024-03-30 | Sleuth: Highland Sleuth
+  - Be02; Kenai; birth date 2016-04-12; black color; female; 480 pounds; from Great Smoky Mountains, Tennessee; arrived 2024-04-12 | Sleuth: Forest Sleuth
+  - Be03; Koda; birth date 2017-09-15; cinnamon color; male; 520 pounds; from Denali National Park, Alaska; arrived 2024-04-24 | Sleuth: Mountain Sleuth
+  - Be04; Luna; birth date 2019-03-15; cream color; female; 460 pounds; from Yellowstone National Park, Wyoming; arrived 2024-05-08 | Sleuth: Valley Sleuth
+

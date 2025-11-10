@@ -1,0 +1,16 @@
+2024-03-05, 4 year old female hyena, born in spring, tan color, 70 pounds, from Friguia Park, Tunisia
+2024-03-18, 7 year old male lion, born in winter, golden color, 420 pounds, from Maasai Mara, Kenya
+2024-03-22, 3 year old female tiger, born in fall, orange color, 310 pounds, from Sundarbans Reserve, India
+2024-03-30, 6 year old male bear, born in summer, brown color, 500 pounds, from Katmai National Park, Alaska
+2024-04-02, 2 year old male hyena, born in spring, mottled color, 85 pounds, from Serengeti National Park, Tanzania
+2024-04-06, 5 year old female lion, born in fall, tawny color, 360 pounds, from Kruger National Park, South Africa
+2024-04-09, 4 year old male tiger, born in winter, white color, 290 pounds, from Ranthambore National Park, India
+2024-04-12, 8 year old female bear, born in unknown, black color, 480 pounds, from Great Smoky Mountains, Tennessee
+2024-04-15, 3 year old female hyena, born in autumn, sandy color, 78 pounds, from Ngorongoro Conservation Area, Tanzania
+2024-04-18, 6 year old male lion, born in summer, dark golden color, 410 pounds, from Serengeti National Park, Tanzania
+2024-04-20, 5 year old female tiger, born in spring, striped orange color, 320 pounds, from Bandhavgarh National Park, India
+2024-04-24, 7 year old male bear, born in fall, cinnamon color, 520 pounds, from Denali National Park, Alaska
+2024-04-28, 4 year old male hyena, born in winter, gray color, 90 pounds, from Etosha National Park, Namibia
+2024-05-01, 2 year old female lion, born in spring, light tawny color, 340 pounds, from Okavango Delta, Botswana
+2024-05-04, 6 year old male tiger, born in summer, golden color, 330 pounds, from Chitwan National Park, Nepal
+2024-05-08, 5 year old female bear, born in spring, cream color, 460 pounds, from Yellowstone National Park, Wyoming
