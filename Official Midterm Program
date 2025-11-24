@@ -1,0 +1,447 @@
+// Blake Wilson
+// Zoo Keeper Challenge Midterm
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <map>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+// Helper function that removes spaces from the beginning and end of text.
+string trim(const string &text) {
+    string result = text;
+    while (!result.empty() && isspace(static_cast<unsigned char>(result.front()))) {
+        result.erase(result.begin());
+    }
+    while (!result.empty() && isspace(static_cast<unsigned char>(result.back()))) {
+        result.pop_back();
+    }
+    return result;
+}
+
+// Helper function that copies a string and makes it all lowercase letters.
+string toLowerCopy(const string &text) {
+    string lowered = text;
+    for (size_t i = 0; i < lowered.size(); ++i) {
+        lowered[i] = static_cast<char>(tolower(static_cast<unsigned char>(lowered[i])));
+    }
+    return lowered;
+}
+
+// Helper function that splits a string every time it sees a comma.
+vector<string> splitByComma(const string &line) {
+    vector<string> pieces;
+    string current;
+    for (size_t i = 0; i < line.size(); ++i) {
+        if (line[i] == ',') {
+            pieces.push_back(trim(current));
+            current.clear();
+        } else {
+            current += line[i];
+        }
+    }
+    pieces.push_back(trim(current));
+    return pieces;
+}
+
+// Helper function that turns a season word into a month and day.
+string pickSeasonDate(const string &seasonWord) {
+    string season = toLowerCopy(seasonWord);
+    if (season == "spring") {
+        return "03-15";
+    }
+    if (season == "summer") {
+        return "06-15";
+    }
+    if (season == "fall" || season == "autumn") {
+        return "09-15";
+    }
+    if (season == "winter") {
+        return "12-15";
+    }
+    return "06-15";
+}
+
+// Helper function that creates a birthday string using age and season.
+string buildBirthDate(int age, const string &season, int arrivalYear) {
+    int birthYear = arrivalYear - age;
+    return to_string(birthYear) + "-" + pickSeasonDate(season);
+}
+
+// Helper function that builds ID strings like Hy01 or Li03.
+string buildId(const string &species, int number) {
+    string lower = toLowerCopy(species);
+    string prefix;
+    if (!lower.empty()) {
+        prefix += static_cast<char>(toupper(static_cast<unsigned char>(lower[0])));
+    }
+    if (lower.size() > 1) {
+        prefix += lower[1];
+    } else {
+        prefix += 'x';
+    }
+    if (number < 10) {
+        return prefix + "0" + to_string(number);
+    }
+    return prefix + to_string(number);
+}
+
+// Base Animal class that stores shared information for all animals.
+class Animal {
+private:
+    string name;
+    int age;
+    string species;
+    string sex;
+    string color;
+    int weight;
+    string origin;
+    string birthDate;
+    string arrivalDate;
+    string id;
+
+public:
+    // Constructor that fills in all of the shared animal details.
+    Animal(const string &newName,
+           int newAge,
+           const string &newSpecies,
+           const string &newSex,
+           const string &newColor,
+           int newWeight,
+           const string &newOrigin,
+           const string &newBirthDate,
+           const string &newArrivalDate,
+           const string &newId)
+        : name(newName),
+          age(newAge),
+          species(newSpecies),
+          sex(newSex),
+          color(newColor),
+          weight(newWeight),
+          origin(newOrigin),
+          birthDate(newBirthDate),
+          arrivalDate(newArrivalDate),
+          id(newId) {}
+
+    virtual ~Animal() {}
+
+    // Getters that let other code read the animal information.
+    string getName() const { return name; }
+    int getAge() const { return age; }
+    string getSpecies() const { return species; }
+    string getSex() const { return sex; }
+    string getColor() const { return color; }
+    int getWeight() const { return weight; }
+    string getOrigin() const { return origin; }
+    string getBirthDate() const { return birthDate; }
+    string getArrivalDate() const { return arrivalDate; }
+    string getId() const { return id; }
+
+    // SECTION: Virtual function that each subclass uses to share its habitat title.
+    virtual string getHabitatTitle() const = 0;
+};
+
+// Hyena subclass that sets the species name and habitat label.
+class Hyena : public Animal {
+public:
+    Hyena(const string &newName,
+          int newAge,
+          const string &newSex,
+          const string &newColor,
+          int newWeight,
+          const string &newOrigin,
+          const string &newBirthDate,
+          const string &newArrivalDate,
+          const string &newId)
+        : Animal(newName, newAge, "Hyena", newSex, newColor, newWeight, newOrigin, newBirthDate, newArrivalDate, newId) {}
+
+    string getHabitatTitle() const override { return "Hyena Habitat:"; }
+};
+
+// Lion subclass that provides the lion habitat information.
+class Lion : public Animal {
+public:
+    Lion(const string &newName,
+         int newAge,
+         const string &newSex,
+         const string &newColor,
+         int newWeight,
+         const string &newOrigin,
+         const string &newBirthDate,
+         const string &newArrivalDate,
+         const string &newId)
+        : Animal(newName, newAge, "Lion", newSex, newColor, newWeight, newOrigin, newBirthDate, newArrivalDate, newId) {}
+
+    string getHabitatTitle() const override { return "Lion Habitat:"; }
+};
+
+// Tiger subclass that provides the tiger habitat information.
+class Tiger : public Animal {
+public:
+    Tiger(const string &newName,
+          int newAge,
+          const string &newSex,
+          const string &newColor,
+          int newWeight,
+          const string &newOrigin,
+          const string &newBirthDate,
+          const string &newArrivalDate,
+          const string &newId)
+        : Animal(newName, newAge, "Tiger", newSex, newColor, newWeight, newOrigin, newBirthDate, newArrivalDate, newId) {}
+
+    string getHabitatTitle() const override { return "Tiger Habitat:"; }
+};
+
+// Bear subclass that provides the bear habitat information.
+class Bear : public Animal {
+public:
+    Bear(const string &newName,
+         int newAge,
+         const string &newSex,
+         const string &newColor,
+         int newWeight,
+         const string &newOrigin,
+         const string &newBirthDate,
+         const string &newArrivalDate,
+         const string &newId)
+        : Animal(newName, newAge, "Bear", newSex, newColor, newWeight, newOrigin, newBirthDate, newArrivalDate, newId) {}
+
+    string getHabitatTitle() const override { return "Bear Habitat:"; }
+};
+
+// Function that reads animal names from a file and stores them by species.
+map<string, vector<string>> readNames(const string &fileName) {
+    map<string, vector<string>> names;
+    ifstream input(fileName);
+    if (!input) {
+        cout << "Could not open " << fileName << " for reading." << endl;
+        return names;
+    }
+
+    string line;
+    string currentSpecies;
+    while (getline(input, line)) {
+        string trimmed = trim(line);
+        if (trimmed.empty()) {
+            continue;
+        }
+
+        string lowered = toLowerCopy(trimmed);
+        if (lowered.find("hyena") != string::npos && lowered.find("names") != string::npos) {
+            currentSpecies = "hyena";
+            continue;
+        }
+        if (lowered.find("lion") != string::npos && lowered.find("names") != string::npos) {
+            currentSpecies = "lion";
+            continue;
+        }
+        if (lowered.find("tiger") != string::npos && lowered.find("names") != string::npos) {
+            currentSpecies = "tiger";
+            continue;
+        }
+        if (lowered.find("bear") != string::npos && lowered.find("names") != string::npos) {
+            currentSpecies = "bear";
+            continue;
+        }
+
+        if (!currentSpecies.empty()) {
+            vector<string> tokens = splitByComma(trimmed);
+            for (size_t i = 0; i < tokens.size(); ++i) {
+                if (!tokens[i].empty()) {
+                    names[currentSpecies].push_back(tokens[i]);
+                }
+            }
+        }
+    }
+
+    return names;
+}
+
+// Function that hands back the next name for a given species.
+string getNextName(const string &species,
+                   map<string, vector<string>> &names,
+                   map<string, int> &nameIndex) {
+    string key = toLowerCopy(species);
+    if (names[key].empty()) {
+        return "Unnamed";
+    }
+    int index = nameIndex[key];
+    if (index >= static_cast<int>(names[key].size())) {
+        return "Unnamed";
+    }
+    nameIndex[key] = index + 1;
+    return names[key][index];
+}
+
+// Function that builds a single animal object from one line of text.
+Animal *buildAnimalFromLine(const string &line,
+                           map<string, vector<string>> &names,
+                           map<string, int> &nameIndex,
+                           map<string, int> &idNumbers,
+                           const string &arrivalDate,
+                           int arrivalYear) {
+    size_t fromSpot = line.find(", from ");
+    string location = "";
+    string mainPart = line;
+    if (fromSpot != string::npos) {
+        location = trim(line.substr(fromSpot + 7));
+        mainPart = line.substr(0, fromSpot);
+    }
+
+    vector<string> pieces = splitByComma(mainPart);
+    if (pieces.size() < 4) {
+        return nullptr;
+    }
+
+    istringstream firstStream(pieces[0]);
+    int age = 0;
+    string yearWord;
+    string oldWord;
+    string sex;
+    string species;
+    firstStream >> age >> yearWord >> oldWord >> sex >> species;
+
+    string season = pieces[1];
+    string loweredSeason = toLowerCopy(season);
+    if (loweredSeason.find("born in") != string::npos) {
+        istringstream seasonStream(season);
+        string bornWord;
+        string inWord;
+        string seasonWord;
+        seasonStream >> bornWord >> inWord >> seasonWord;
+        season = seasonWord;
+    } else {
+        season = "unknown";
+    }
+
+    string color = pieces[2];
+
+    istringstream weightStream(pieces[3]);
+    int weight = 0;
+    weightStream >> weight;
+
+    string name = getNextName(species, names, nameIndex);
+
+    idNumbers[toLowerCopy(species)] += 1;
+    int idNumber = idNumbers[toLowerCopy(species)];
+    string id = buildId(species, idNumber);
+    string birthDate = buildBirthDate(age, season, arrivalYear);
+
+    string loweredSpecies = toLowerCopy(species);
+    if (loweredSpecies == "hyena") {
+        return new Hyena(name, age, sex, color, weight, location, birthDate, arrivalDate, id);
+    }
+    if (loweredSpecies == "lion") {
+        return new Lion(name, age, sex, color, weight, location, birthDate, arrivalDate, id);
+    }
+    if (loweredSpecies == "tiger") {
+        return new Tiger(name, age, sex, color, weight, location, birthDate, arrivalDate, id);
+    }
+    if (loweredSpecies == "bear") {
+        return new Bear(name, age, sex, color, weight, location, birthDate, arrivalDate, id);
+    }
+
+    return nullptr;
+}
+
+// Function that writes the final report grouped by habitat and totals.
+void writeReport(const string &fileName,
+                 const vector<Animal *> &animals,
+                 const map<string, int> &speciesCounts) {
+    ofstream output(fileName);
+    if (!output) {
+        cout << "Could not open " << fileName << " for writing." << endl;
+        return;
+    }
+
+    map<string, vector<Animal *>> habitats;
+    for (size_t i = 0; i < animals.size(); ++i) {
+        habitats[animals[i]->getHabitatTitle()].push_back(animals[i]);
+    }
+
+    for (map<string, vector<Animal *>>::iterator it = habitats.begin(); it != habitats.end(); ++it) {
+        output << it->first << "\n";
+        for (size_t j = 0; j < it->second.size(); ++j) {
+            Animal *animal = it->second[j];
+            output << animal->getId() << "; "
+                   << animal->getName() << "; age " << animal->getAge() << "; birth date " << animal->getBirthDate() << "; "
+                   << animal->getColor() << "; " << animal->getSex() << "; "
+                   << animal->getWeight() << " pounds; from " << animal->getOrigin()
+                   << "; arrived " << animal->getArrivalDate() << "\n";
+        }
+
+        string lowerTitle = toLowerCopy(it->first);
+        if (lowerTitle.find("hyena") != string::npos) {
+            output << "Total Hyena count: " << speciesCounts.at("hyena") << "\n";
+        } else if (lowerTitle.find("lion") != string::npos) {
+            output << "Total Lion count: " << speciesCounts.at("lion") << "\n";
+        } else if (lowerTitle.find("tiger") != string::npos) {
+            output << "Total Tiger count: " << speciesCounts.at("tiger") << "\n";
+        } else if (lowerTitle.find("bear") != string::npos) {
+            output << "Total Bear count: " << speciesCounts.at("bear") << "\n";
+        }
+
+        output << "\n";
+    }
+
+    output << "Total animals in zoo: " << animals.size() << "\n";
+}
+
+// Main function that coordinates loading files, building animals, and reporting.
+int main() {
+    const string arrivalDate = "2024-03-05";
+    const int arrivalYear = 2024;
+    // Remembering when the animals arrived so birthdays and report entries match.
+
+    map<string, vector<string>> names = readNames("animalNames.txt");
+    if (names.empty()) {
+        return 1;
+    }
+    // Checking that the name file was read correctly before continuing.
+
+    map<string, int> nameIndex;
+    map<string, int> idNumbers;
+    map<string, int> speciesCounts;
+    // Tracking which name comes next, which ID number comes next, and how many animals we have.
+
+    vector<Animal *> animals;
+    // Storing every animal pointer so we can write them into the report later.
+
+    ifstream arrivals("arrivingAnimals.txt");
+    if (!arrivals) {
+        cout << "Could not open arrivingAnimals.txt for reading." << endl;
+        return 1;
+    }
+    // Making sure the arriving animals file is ready before reading it line by line.
+
+    string line;
+    while (getline(arrivals, line)) {
+        string trimmed = trim(line);
+        if (trimmed.empty()) {
+            continue;
+        }
+
+        Animal *animal = buildAnimalFromLine(trimmed, names, nameIndex, idNumbers, arrivalDate, arrivalYear);
+        if (animal != nullptr) {
+            animals.push_back(animal);
+            string lowerSpecies = toLowerCopy(animal->getSpecies());
+            speciesCounts[lowerSpecies] += 1;
+        }
+    }
+    // Reading every arrival line, building the animal objects, and counting species totals.
+
+    writeReport("zooPopulation.txt", animals, speciesCounts);
+    // Creating the final report file once all animals are collected.
+
+    for (size_t i = 0; i < animals.size(); ++i) {
+        delete animals[i];
+    }
+    // Cleaning up every animal pointer so there are no memory leaks.
+
+    cout << "Zoo population report created successfully." << endl;
+    return 0;
+}
